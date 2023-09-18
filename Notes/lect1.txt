@@ -1,0 +1,26 @@
+create element in html file -
+with javascript only - 
+
+<!-- <script>
+    const heading = document.createElement('h1');
+
+    heading.innerHTML = "Namaste everyone from Javascript"
+
+   const root = document.getElementById('root')
+
+   root.appendChild(heading);
+
+    </script> -->
+
+
+with React- 
+ createElement(tag, id or class want to give that tag - mentioned in this object, content we want to put (if we want to pass multi ele, then pass in array))
+
+ 
+ const heading = React.createElement('h1',{
+    className : 't'   //its give id t - if already persent then it change to it 't' like here - title change to t
+ },'Namaste from React');
+ console.log(heading);
+const root = ReactDOM.createRoot(document.getElementById('root'))
+
+root.render(heading);  // here it override everything in heading and show its result that we give it

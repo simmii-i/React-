@@ -1,0 +1,142 @@
+`nmp init` - [
+    to inisilization npm and give package.json file
+]
+pakage .json - 
+[
+npm is bassicaly use to manage our pakage, we need to minify we need to move in-- al are manage by
+why do we use npm ?
+bcoz we want alot of pakage , our react app can't be build just injecting react to our web page. package install by npm.
+
+bcoz our react app is powered by alot of things , lot to pakage (suppose we have to minify, we have to bunddle things up ,we have to remove consolel log,we have to optimized our app )
+]
+
+
+
+to install it - cmd ->    npm install -D parsel
+here -D is devDepencies - we install parcel s devDepencies and -D or --save-dev both are same
+
+devDepencies means all the pakage that my project need that is a Depencies. means my project is depend on something, 
+and Parcel is one of such  Depencies. bcoz we need a bunddler, that's why we write -D.
+
+package json --> [
+in this file ----> parcel : (^2.8.3) or (~2.8.3)
+caret(^) - its is the way for us to tell us which version should we using
+its automatically upgrade version for minor version
+tild (~ )- upgrade version for major upgrade
+
+]
+package lock-json -->[
+tell the what version exactly we are using 
+
+lock the version - what version
+
+package lock-json imp thing -
+lock the version
+1.never put package-lock-json in gitignore
+2. maintain exact version of it and keeps a track of it and also 
+maintain hash of it. 
+This hash ensure that what exactly the version of parcel running in my 
+system is exactly the same on production. it exactly same or not that's 
+why it maintain intergrity bcoz it has hash.
+
+]
+
+
+Node Modules - [
+
+kind of database for our npm. 
+parcel also has Depencies that are stored in this module. parcel uses alot of thing to optimized our app, liki minify, clear console log these all Depencies are stored in node module. and node module has alotttttt. it keeping track or store of each and evry Depencies of npm.
+
+
+ -- No need to put node module on gitRepo why ?
+ bcoz our package-lock-json has the sufficient information to re-generate the node module. package-lock-json maintain track all of node module
+ we only ship our package-lock-json on server and this package-lock-json help us to re generate the node module on server.it will make sure that node module are fixed.
+]
+
+-
+-
+-
+-
+
+
+ thing that done by parcel -- FEATURES  -----------------
+ -
+
+
+ *parcel keep tract of all the file which you are updating : how ?
+ *
+
+ *Hot Module Replacement - HMR [
+    relaod the file with the help of file Watchers
+]
+
+*file Watchers algorithm - C++ [
+keep the track of all the file were changing in real time and
+it tells to server reload it
+]
+
+* Created file Server
+
+`npx parcel index.html`    [
+    execute file and run the file and create parcel cashe.
+    its just create a development build for us and it hosted on server
+    
+]
+
+
+*parcel cache [
+    
+    parcel using this space or file to do all that like, minify, HMR, file Watchers etc.
+]
+
+
+`npx parcel buld index.html`[
+when i tell parcel to make production build using this build command 
+and  it minify file, do alot thing and then push this
+ build file into dist folder. (also create dist folder - folder have js, index, css etc production ready file which are Compressed, minify etc)
+ ]
+
+ *Minify 
+ *Bundling
+ *Cleanig our code - remove console
+ *Dev and Production Build
+ *Super Fast Build algorithm
+ *Image optimimzation
+ *Cashing While development
+ *Compression
+ *Compatble with older version of browser
+ *HTTPS on dev
+ * Port number (manage)
+ *Consistent Hashing Algorithm 
+ *Zero Cnofig
+ * Tree Shaking - removing unwanted code
+ eg ( when we use a library it import all the code,
+  but we use  2-3 function only from that library, 
+  so rest all the code ignored or removed by parcel
+   that's called tree shaking )
+
+
+ *Transitive Depencies - when you have to build a production ready app,
+  we need to do alot of things which is minify, Compression,Cleanig our 
+  code , Bundling, cashing  etc... cant do this alone so we need
+ depencies and those depencies also  depend on other depencies,
+  so these depencies over other depencies called
+   Transitive Depencies.
+
+*
+*
+*
+
+
+--- we import React  from "react" (from node module)
+              ReactDOM from "react-dom/client"  (from node module)
+
+
+-- after import we have to mentioned the type of script tag to tell that  we use import react from node module:
+type ="module"
+
+** gitignore - put everything that we re-create which is 
+node module (recreate from package-lock-json)
+parcel-cashe (from `npx parcel index.html`)
+dist         (from `npx parcel build index.html`)
+

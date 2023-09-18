@@ -1,0 +1,151 @@
+* Ques ❓ is jsx mandatory ?
+     No
+
+* Ques ❓ is ES6 mandatory ?
+    No
+
+**  ☑️ Comments in JSx
+     -- {{
+        //Comments
+        /*
+          multiLine comment
+        */
+     }}
+
+
+AppLayout 😍
+/**
+      Header
+        -Logo
+        -Nav items(Right)
+        -Cart
+      Body
+        -Search Bar
+        -RestrauntList
+          RestrauntCard
+             -image
+             -Name
+             - Cusing (north,pujabi)
+      Footer
+          -links
+          -copyRights
+     */
+
+
+
+
+
+** -- 💁 in JSX - there will be only one parent element
+-- we can wrap in a div tag    
+-- ❓ what problem with div tag ? 
+    -- is show as  div tag in our html code(DOM)
+
+
+-- <React.Fragment> <React.Fragment/>
+            -- use to wrap our code as a parent component  
+            -- its a component that import from react
+            -- like a empty tag that dosent show in html(dom)
+            -- shortHand - <> </>
+
+
+**-- Inline Style
+    --give styling using javascript object  {{object}}
+     
+     const Styleobj = {
+        background : "red",
+     }
+    
+    const jsx = (
+        <div 
+        style={Styleobj} 
+        <h1> jsx </h1>
+        </div>
+    )
+
+     const jsx2 = (
+        <div 
+        {jsx}
+        style={{
+            color : "yellow",
+         }} 
+        <h1> jsx </h1>
+        </div>
+    )
+
+
+
+** ❓ Props - properties (way of passing data in jsx syntax)
+             -- when we pass props that means we pass some data inside our component(function).
+             -- indirectly - passed data (object) as argument (object)
+             -- accept tha data (object) as parameter in component  (object)
+
+      eg --
+      function define---
+            -- in JS 
+                   function a ( para1) {
+                      console.log(Para1);
+                   }
+              
+            -- in JSX 
+                 const a = (data) => (
+                    {console.log(data)  //print object
+                     console.log(data.data)  // print hellow} //
+                 );
+
+
+      function call
+            -- in JS
+                a(argument);
+           -- in JSX
+               <a data="hellow" >
+               (naming of props...may be differ as argument and as parameter like simple javascript)
+
+
+  ❓Virtual DOM 🙋‍♂️-- representation of the Document Object Model (DOM) .Updating the virtual DOM is 
+                  comparatively faster than updating the actual DOM (via JavaScript).
+
+ ** ❓ why is React Fast ?
+      
+     -- Use Reconscilation  
+         --Reconciliation in React uses a Diff algorithm to identify the differences
+            between trees (the actual DOM and virtual DOM) and determines what needs to
+            be updated (with the help of keys). It then updates only the small portion of it,
+            so it doesn't render the entire app; it only re-renders the updated portion. 
+    
+   --  ❓ Keys ? 
+          --A “key” is a special string attribute you need to include when creating 
+             lists of elements in React.
+         --Keys are used in React to identify which items in the list are 
+            changed, updated, or deleted.
+
+            no keys <<<<< Index  Key <<<<<<<< Unique Key (best practice)
+
+   -- ❓why do we use Keys ? 
+            --If you don't provide a key, it won't be possible to identify the specific
+              portion of the list to update and re-render everything
+               that is present in that list.
+
+
+
+
+ ** configuration-driven UI 🙋‍♀️- UI changed according our config (driven by api or Backend).
+       the layout, styles, and other properties of UI
+       elements are defined in a configuration file or database, which can be
+       easily modified without requiring changes to the codebase
+       (config driven by Backend and api)
+
+  ***** Detailed Explanation ******      
+
+A "configuration-driven UI" refers to a user interface (UI) design approach where the behavior and appearance of the UI 
+are determined by configuration settings rather than hardcoding them directly into the software's code.
+
+In simpler terms, it means that the way a website, application, or software looks and works can be controlled and 
+customized through settings or configurations. Instead of writing new code every time you want to change something
+ in the UI, you can simply adjust these configurations.
+
+For example, you might have a configuration file that specifies things like the colors of buttons, the layout of the
+ page, or which features are enabled or disabled. By changing this configuration, you can alter the UI's appearance
+  and functionality without having to write new code.
+
+This approach makes it easier to make changes, adapt the UI to different needs, and manage the UI separately from 
+the core software logic, making it more flexible and user-friendly for designers and developers.

@@ -1,0 +1,33 @@
+Default Export
+  -- export only one thing
+Default import 
+   -- to import a Default Export file 
+         - syntax - 
+              import componentName from "path"
+              import Header from "./components/Header.js"
+              .js not mandatory
+
+Named Export 
+    -- write export in front of component and element
+    -- export as many as we want
+   
+Named import 
+   -- to import a Named Export file  
+       -- syntax       
+           import {componentName} from "path"
+           import {Title} from "./components/Header.js"
+
+to import everything
+   ----
+       import * as Obj from "./components/Header.js"
+    
+       Obj.title
+
+to import multiple file
+   --- 
+   import Header,{title} from "path"       --bcoz here Header is Default import and title is named import
+
+for JSX code - .js and .jsx extension both are worked
+
+
+** 
