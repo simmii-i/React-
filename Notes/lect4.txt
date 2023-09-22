@@ -126,7 +126,9 @@ AppLayout 😍
                that is present in that list.
 
 
-
+  -- diff algo wriiten into the "React" core
+      - dom update in "React-Dom"
+      - React native has same diff algo
 
  ** configuration-driven UI 🙋‍♀️- UI changed according our config (driven by api or Backend).
        the layout, styles, and other properties of UI

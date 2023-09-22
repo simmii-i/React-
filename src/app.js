@@ -5,8 +5,6 @@ import Body from "./components/Body";
 import { Footer } from "./components/Footer";
 
 
-
-
 const AppLayout = () => (
   <>
     <Header />
@@ -18,3 +16,5 @@ const AppLayout = () => (
 const root = ReactDOM.createRoot(document.getElementById("root"));
 // root.render(<HeaderComponent/>);
 root.render(<AppLayout />);
+
+

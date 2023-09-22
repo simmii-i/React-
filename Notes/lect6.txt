@@ -1,0 +1,201 @@
+❓ What is a Microservice? 
+   -A microservice is a software architectural approach in which a complex application is built as 
+       a collection of small, independent, and loosely coupled services.
+      
+   - Microservices communicate through well-defined APIs and enable easier development, scalability, and maintenance.
+
+
+example -
+  -- Imagine you're running a restaurant, and instead of having one giant kitchen (or software). to prepare
+   all types of food, you have several specialized kitchens  or stations (microservices) .
+   
+   -Each kitchen(microservice)is responsible for a specific type of dish: one for pizza, one for burgers, one for sushi, and so on.
+   These kitchens (microservices) operate independently but communicate with each other when needed,
+   like when an order includes both a burger and sushi.
+
+Uses/ Advantge -
+    -Scalability: Microservices can scale independently, optimizing resource usage.
+    -Flexibility: Independent development and deployment make it easier to introduce new features and fix issues.
+    -Fault Isolation: Failures in one microservice don't affect the entire application.
+    -Team Autonomy: Teams can work on microservices separately, speeding up development.
+    -Simplified Maintenance: Updates and fixes are isolated to specific microservices.
+    -Easier Testing: Smaller, isolated microservices are easier to test.
+    -Monolith Architecture:
+
+
+
+ ❓ What is Monolith architecture? 
+    -Monolithic architecture is a traditional software architectural style in which all the components and 
+    functions of an application are tightly integrated and interconnected within a single codebase and deployment unit.
+    - all the aspects of the software User interface, business logic, and data access are combines into a single unit .
+
+❓ What is useEffect in Hook ?
+     --The useEffect hook is a fundamental part of React that allows you to perform side-effects in functional components. 
+     Side-effects are operations that happen outside of the normal component rendering, such as data fetching, 
+     DOM manipulation, or setting up subscriptions. 
+
+    
+     useEffect(func, []); -- This is a hook imported from React.
+         --> [] means an empty dependency array.
+             It's like a list of things the useEffect hook depends on.
+         
+         --> When you use an empty dependency array like this,
+            the useEffect function runs only once after the component is first rendered.
+
+ ❓ Why do we need a useEffect Hook?
+       -Performing Side-Effects =>
+       allows you to perform side-effects in functional components.These operations are essential but should not be done directly in the component's render method.
+      
+      -Managing Asynchronous Operations =>
+        Many side-effects involve asynchronous operations like fetching data. 
+        useEffect handle asynchronous code and ensures that these operations don't blockthe rendering of the component.
+
+
+ ❓ What is Optional Chaining ? 
+
+     -optional chaining operator is represented by a question mark `?.` 
+     -Optional Chaining in JavaScript is like a safety net for accessing properties and methods in objects. 
+     - It helps prevent your code from crashing if you try to access something that doesn't exist. 
+     -Instead of throwing an error, it gracefully returns "undefined" when it can't find what you're looking for,  so your program keeps running smoothly without breaking.
+
+    Example -
+   1. Invoking Methods:
+         You can also use optional chaining when calling methods on objects.
+                const calculator = {
+                  add: (a, b) => a + b,
+                };
+    
+                const result = calculator?.add(2, 3); // No error if calculator is undefined 
+   
+   2. Array Items:
+          It can be used with arrays to access elements within an array 
+         without worrying about the array being null or undefined.
+        
+                const myArray = [1, 2, 3];
+                
+                const thirdItem = myArray?.[2]; // No error if myArray is undefined
+
+   3. Accessing Object Properties: 
+          Instead of writing object.property or object['property'], 
+          you can use object?.property. 
+          If object is null or undefined, the expression returns undefined without throwing an error.
+
+             const person = {
+               name: 'John',
+               address: {
+                 city: 'New York',
+               },
+             };
+             
+             const cityName = person?.address?.city; // No error even if address is undefined
+
+❓ What is Shimmer UI?
+     - Shimmer UI, also called shimmer effect or skeleton screen, is used in mobile apps and websites 
+     to show a loading animation while content is fetched.
+     - The shimmer animation is replaced by actual content as it loads, making the loading experience smoother.
+     - How it works: When content takes time to load, a shimmer animation is displayed instead of empty areas to show progress.
+
+
+❓ What is the difference between JS expression and JS statement ?
+
+   -- 🟡 JavaScript Expression:
+       -An expression is a piece of code that produces a value (a result).
+       -Expressions can be as simple as a single variable, a literal value (like a number or string), or more complex combinations of values and operators.
+       
+       -Examples of expressions:
+              5 + 3 (produces the value 8)
+              myVar (produces the value stored in the variable myVar)
+              2 * (x + 3) (produces a value based on the calculation)
+   
+   -- 🟡 JavaScript Statement:
+
+       -A statement is a larger code structure that performs an action or a task.
+       -Statements often include keywords and are terminated by a semicolon (;), although in some cases, the semicolon can be omitted due to automatic semicolon insertion (ASI).
+       
+       -Examples of statements:
+
+       if statement: Executes a block of code conditionally.
+       for statement: Creates a loop that executes a block of code multiple times.
+       while statement: Creates a loop that executes a block of code while a condition is true.
+       function statement: Declares a function that can be called later.
+ 
+ --  🟡 statement as expression
+      -Using the Conditional (Ternary) Operator  :  Assigns values based on a condition (expression-like).
+      -Using Arrow Functions                     :  Assigns values to variables using concise functions (expression-like).
+   
+    👉allowing you to write statements in a more expression-like manner. But they are still executed as statements in JavaScript 🟥.
+
+
+❓  What is Conditional Rendering, explain with a code example ?
+            -Conditional rendering in React refers to the practice of rendering different components or content based on
+              certain conditions or logic within your React component. 
+            -You can use conditional rendering to display different UI elements or content depending on user input, state changes, or other factors.
+                      
+                      import React, { useState } from 'react';
+                      
+                      function App() {
+                        const [isLoggedIn, setIsLoggedIn] = useState(false);
+                      
+                        // Function to toggle the login state
+                        const toggleLogin = () => {
+                          setIsLoggedIn(!isLoggedIn);
+                        };
+                      
+                        return (
+                          <div>
+                            <h1>Conditional Rendering Example</h1>
+                            <button onClick={toggleLogin}>
+                              {isLoggedIn ? 'Log Out' : 'Log In'}
+                            </button>
+                      
+                            {isLoggedIn ? (
+                              <p>Welcome, user! You are logged in.</p>
+                            ) : (
+                              <p>Please log in to access your account.</p>
+                            )}
+                          </div>
+                        );
+                      }
+                      
+                      export default App;
+          
+          
+          
+❓ What is CORS? 
+        --Cross-Origin Resource Sharing (CORS) is like a security checkpoint for web browsers. 
+          It ensures that when a web page from one website tries to ask another website for data (like fetching images or making API requests), 
+          the other website has to say it's okay. Without CORS, any website could ask for your personal data from other websites without permission.
+         So, CORS helps keep your data safe by controlling which websites can access what.
+  
+
+❓  What is async and await?
+
+     1. 🟡 async:   It is a keyword that you place in front of a function declaration to indicate that the function will perform asynchronous operations and return a promise.
+      For example:
+     
+        async function fetchData() {
+          // Asynchronous operations here
+        }
+       
+     2. 🟡 await:  It is used inside an `async` function to pause the execution of the function until a promise is resolved. 
+       It is typically used with functions that return promises. For example:
+     
+        async function fetchData() {
+          const response = await fetch('https://api.example.com/data');
+          const data = await response.json();
+          return data;
+        }
+     
+       -- In this example, `await` is used to wait for the `fetch` request to complete and for the JSON data to be parsed before continuing the execution of the function.
+       -- `async` and `await` make it easier to write and read asynchronous code, making it appear more like traditional synchronous code. 
+       -- This improves code readability and maintainability when dealing with tasks like fetching data from APIs or working with promises.
+     
+❓ What is the use of `const json = await data.json();` in getRestaurants() ?
+     -  is used to extract and parse JSON data from an HTTP response.
+     - `await` pauses the code until the data is fully fetched and ready to use.
+     - `json` will contain the parsed JSON data, making it accessible for further processing or display in your application.
+
+     data.json() is a method in JavaScript that is typically used to parse JSON (JavaScript Object Notation)
+     data. JSON is a lightweight data interchange format
+      -It takes the raw data (data) received from an HTTP response, which is typically in a JSON format.
+      -It parses this raw data into a JavaScript object or array, depending on the structure of the JSON data 

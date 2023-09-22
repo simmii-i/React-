@@ -30,4 +30,42 @@ to import multiple file
 for JSX code - .js and .jsx extension both are worked
 
 
-** 
+❓ importance of config.js file ? 
+      --  purpose to add config. js file is to use static data which needs
+       to be used all over the application.
+
+❓ React Hook ?   (set of functions)
+     -- A Hook is a special function that lets you “hook into” React features.
+       For example, useState is a Hook that lets you add React state to function
+        components.
+    
+    -- why we use ?
+      --for 
+        -Functional Components
+        -Reusing Stateful Logic
+        -Simplified State Management
+        -Efficient Side-Effect Handling
+        -Improved Readability
+        -No Need for HOCs or Render Props (Higher Order Components)
+        -Improved Performance
+
+❓ what is useState ?
+    --useState is a React Hook that allows you to add and manage state
+     in functional components. It returns a state variable and a function 
+     to update that variable. This Hook is used to maintain component-specific
+     data that can change over time and trigger re-renders when the state is updated.
+
+     eg - 
+        import React, { useState } from 'react';
+
+           function Counter() {
+             const [count, setCount] = useState(0);
+           
+             return (
+               <div>
+                 <p>Count: {count}</p>
+                 <button onClick={() => setCount(count + 1)}>Increment</button>
+               </div>
+             );
+           }
+

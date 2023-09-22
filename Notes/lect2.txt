@@ -13,10 +13,10 @@ bcoz our react app is powered by alot of things , lot to pakage (suppose we have
 
 
 to install it - cmd ->    npm install -D parsel
-here -D is devDepencies - we install parcel s devDepencies and -D or --save-dev both are same
+here -D is devDependencies - we install parcel s devDependencies and -D or --save-dev both are same
 
-devDepencies means all the pakage that my project need that is a Depencies. means my project is depend on something, 
-and Parcel is one of such  Depencies. bcoz we need a bunddler, that's why we write -D.
+devDependencies means all the pakage that my project need that is a Depencies. means my project is depend on something, 
+and Parcel is one of such  Dependencies. bcoz we need a bunddler, that's why we write -D.
 
 package json --> [
 in this file ----> parcel : (^2.8.3) or (~2.8.3)
@@ -45,7 +45,7 @@ why it maintain intergrity bcoz it has hash.
 Node Modules - [
 
 kind of database for our npm. 
-parcel also has Depencies that are stored in this module. parcel uses alot of thing to optimized our app, liki minify, clear console log these all Depencies are stored in node module. and node module has alotttttt. it keeping track or store of each and evry Depencies of npm.
+parcel also has Dependencies that are stored in this module. parcel uses alot of thing to optimized our app, liki minify, clear console log these all Dependencies are stored in node module. and node module has alotttttt. it keeping track or store of each and evry Dependencies of npm.
 
 
  -- No need to put node module on gitRepo why ?
@@ -116,12 +116,12 @@ and  it minify file, do alot thing and then push this
    that's called tree shaking )
 
 
- *Transitive Depencies - when you have to build a production ready app,
+ *Transitive Dependencies - when you have to build a production ready app,
   we need to do alot of things which is minify, Compression,Cleanig our 
   code , Bundling, cashing  etc... cant do this alone so we need
- depencies and those depencies also  depend on other depencies,
-  so these depencies over other depencies called
-   Transitive Depencies.
+ dependencies and those dependencies also  depend on other dependencies,
+  so these dependencies over other dependencies called
+   Transitive Dependencies.
 
 *
 *
