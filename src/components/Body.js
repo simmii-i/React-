@@ -2,6 +2,7 @@ import RestrauntCard from "./RestrauntCard";
 import { restrauntList } from "../config";
 import { useEffect, useState } from "react";
 import Shimmer from "./shimmer";
+import { Link } from "react-router-dom";
 
 function filterData(searchInput, restraunts) {
   return restraunts.filter((restraunt) =>
@@ -33,7 +34,6 @@ const Body = () => {
     );
   }
 
-
   // to avoid rendering--> ? or return null
   if (!AllRestraunts) return <h1>not there</h1>;
 
@@ -43,8 +43,8 @@ const Body = () => {
   //conditonal renderring
   // if restraunt is emty => shimmer UI
   // has data =>
-  return (AllRestraunts.length === 0) ? (
-    <Shimmer/>
+  return AllRestraunts.length === 0 ? (
+    <Shimmer />
   ) : (
     <>
       <div className="search-container">
@@ -72,11 +72,18 @@ const Body = () => {
       </div>
 
       <div className="restraunt-list">
-      {/* (filteredRestraunts?.length === 0) ? return (<h1>sorry ....😓 <br></br> No Restraunt math your filter ! Try something else 😻</h1>) */}
+        {/* (filteredRestraunts?.length === 0) ? return (<h1>sorry ....😓 <br></br> No Restraunt math your filter ! Try something else 😻</h1>) */}
         {filteredRestraunts.map((Restraunt) => {
-
-          return <RestrauntCard {...Restraunt.info} />;
-        })} 
+          return (
+            <Link
+              to={"/restaurant/" + Restraunt.info.id}
+              key={Restraunt.info.id}
+            >
+              {" "}
+              <RestrauntCard {...Restraunt.info} />{" "}
+            </Link>
+          );
+        })}
       </div>
     </>
   );
