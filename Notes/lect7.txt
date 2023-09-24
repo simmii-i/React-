@@ -1,0 +1,100 @@
+*** imp thing about hooks ***
+  🔸**Component Nesting:**
+     - Avoid creating a component inside another component's body.
+     - Doing so can lead to unnecessary component re-rendering.
+
+  🔸**`useState` Usage:**
+     - Never create a `useState` variable inside an `if` statement or a `loop`.
+     - `useState` is a React hook for creating local state variables within functional components.
+     - Always use `useState` within the component and avoid using it outside of it.
+
+ 🔸**React Router DOM**
+    - A library package for routing in React applications.
+    - To use it, import `{createBrowserRouter}` from "react-router-dom".
+    - Create a configuration (with the name "appRouter") to define what happens when a certain path is loaded.
+    
+ 🔸**createBrowserRouter**
+    - Takes an object of `path` and `element`, specifying which element to load for a given path.
+
+ 🔸**RouterProvider**
+    - Used to render the router created with `createBrowserRouter`, similar to passing props.
+    - Example usage: `root.render(<RouterProvider router={appRouter} />)`.
+
+ 🔸**useRouterError**
+     -Useful for catching and displaying routing errors to the user.
+     - A Hook that provides access to routing error information as an object.
+
+ 🔸**Link**
+     - Similar to the `<a>` HTML tag, but it doesn't reload the whole page.
+     - Behind the scenes, it uses the `<a>` tag and keeps track of links, allowing the browser to understand them.
+     - Provided by `react-router-dom` as the `{Link}` component.
+
+ 🔸**Outlet**
+    - Used to display content filled by children configuration.
+    - Useful for creating nested routes.
+    - Commonly used to keep header and footer always visible while changing the content between them based on the route.
+    - All children components go into the outlet, and it renders according to the configuration defined for children.
+    
+  ❓ What would happen if we do console.log(useState())?
+      --useState() is a React Hook used for managing state in a functional component. It returns an array with
+       two elements: the current state value and a function to update that state. 
+       The console.log will display this array in the console.
+      --However, since you didn't provide an initial value, the initial state value will be undefined.
+        output - [undefined, function]
+
+
+❓ How will useEffect behave if we don't add a dependency array ?
+      --The effect will run after every render of the component, including the initial render and every re-render.
+      --It doesn't take into account any specific dependencies, so it will run unconditionally.
+
+❓  **SPA (Single Page Application)**
+        - SPA stands for Single Page Application.
+        - It's a type of web app that loads one HTML page and updates content dynamically.
+        - Content updates occur without full page refresh.
+        - Uses client-side routing for in-app navigation.
+        - Relies on APIs for data retrieval and rendering.
+        - Offers a smoother and more responsive user experience.
+        - Often employs client-side state management.
+        - SEO can be a challenge; solutions like SSR or prerendering are used.
+        - Commonly built with JavaScript frameworks like React, Angular, and Vue.js.
+
+❓  Client-Side Routing: 
+          -SPAs often implement client-side routing, where the routing logic is handled on the client side using JavaScript. 
+          This allows for navigation within the application without making requests to the server for each page.
+
+
+❓**Client-Side Routing:**
+
+    1. **Routing Logic:** 
+       - In client-side routing, the routing logic is handled on the client side, typically using JavaScript.
+       - When a user clicks a link or enters a URL, the browser doesn't make a request to the server for a new HTML page. Instead, JavaScript code on the client decides what content to display based on the route.
+    
+    2. **Page Updates:**
+       - Client-side routing updates the page content dynamically without requiring a full page refresh.
+       - It can provide a smoother and more responsive user experience because only the necessary data is fetched and updated.
+    
+    3. **Network Traffic:**
+       - In client-side routing, the initial HTML page is loaded from the server, and subsequent updates are achieved by fetching data (often in JSON format) from an API.
+       - This reduces the amount of data transferred between the client and server after the initial page load.
+    
+    4. **SEO Challenges:**
+       - Client-side routing can pose challenges for search engine optimization (SEO) because search engines may have difficulty indexing content loaded dynamically. Techniques like server-side rendering (SSR) or prerendering are used to address this issue.
+    
+❓**Server-Side Routing:**
+
+      1. **Routing Logic:**
+         - Server-side routing is the traditional approach where routing logic is handled on the server.
+         - When a user clicks a link or enters a URL, the browser makes a request to the server, which then determines which HTML page to send back to the client.
+      
+      2. **Page Updates:**
+         - Server-side routing results in full page refreshes. Each new URL or route corresponds to a different HTML page.
+         - This can sometimes lead to slower user experiences, especially for content-heavy websites.
+      
+      3. **Network Traffic:**
+         - Server-side routing sends complete HTML pages from the server to the client for each route change, resulting in higher data transfer.
+      
+      4. **SEO Benefits:**
+         - Server-side routing is generally more SEO-friendly because each page is fully rendered on the server and can be indexed by search engines.
+      
+    
+
