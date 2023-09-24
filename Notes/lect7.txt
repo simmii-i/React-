@@ -29,7 +29,7 @@
      - Behind the scenes, it uses the `<a>` tag and keeps track of links, allowing the browser to understand them.
      - Provided by `react-router-dom` as the `{Link}` component.
 
- 🔸**Outlet**
+ 🔸 **Outlet**
     - Used to display content filled by children configuration.
     - Useful for creating nested routes.
     - Commonly used to keep header and footer always visible while changing the content between them based on the route.
