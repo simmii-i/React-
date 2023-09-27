@@ -1,0 +1,240 @@
+❓ How do you create Nested Routes react-router-dom cofiguration ?
+          const appRouter = createBrowserRouter([
+            {
+              path : "/",
+              element : <AppLayout/>,
+              errorElement : <Error/>,
+              children : [
+                {
+                  path : "/",
+                  element : <Body/>
+                },
+                {
+                  path : "/about",
+                  element : <About/>,
+                  children : [ {
+                    path : "profile",
+                    element : <Profile/>
+                  }
+                  ]
+                },
+              ],
+            },
+           
+          ])
+  root.render(<RouterProvider router ={appRouter} />);
+
+
+❓ What is the order of life cycle method calls in Class Based Components ?
+
+In Class-Based Components in React, the order of lifecycle method calls is as follows:
+    1. **Initialization Phase:**
+       - `constructor()`: This method is called when an instance of the component is created. It's typically used for setting initial state and binding methods.
+    
+    2. **Mounting Phase (When the component is first added to the DOM):**
+       - `render()`: This method is called to generate the component's UI elements.
+       - `componentDidMount()`: After the component's UI is rendered in the DOM, this method is called. It's often used for tasks like making API calls or setting up event listeners.
+    
+    3. **Updating Phase (When the component's props or state change):**
+       - `shouldComponentUpdate()`: This method is called to determine if the component should re-render. It can be used to optimize rendering.
+       - `render()`: If `shouldComponentUpdate` returns `true`, `render()` is called again to update the UI.
+       - `componentDidUpdate()`: After the UI is updated, this method is called. It's used for tasks like handling changes in the DOM or making additional API calls.
+    
+    4. **Unmounting Phase (When the component is removed from the DOM):**
+       - `componentWillUnmount()`: This method is called just before the component is removed from the DOM. It's used for cleanup tasks like canceling timers or removing event listeners.
+
+❓ Why do we use componentDidMount?
+     for two main reasons:  
+      1. **Fetching Data and Side Effects:** 
+                `componentDidMount` is a lifecycle method that is called after a component has been rendered in the DOM. 
+                It's often used to perform tasks that involve interacting with external data sources, such as making API requests or setting up event listeners. 
+                Since it's called after the initial rendering, it's a safe place to perform these operations without causing issues in the rendering process.
+      
+      2. **Access to the DOM:** 
+                After the initial render, `componentDidMount` provides access to the DOM elements created by the component. This is useful when you need to work with the DOM directly, 
+                like initializing third-party libraries, modifying elements, or measuring their sizes.
+      
+
+❓ Why do we use componentWillUnmount? Show with example ?
+     We use componentWillUnmount in React when we need to perform cleanup or teardown actions just before a component is removed from the DOM. 
+     This method is helpful for preventing memory leaks and ensuring that resources associated with the component are released properly.
+
+                             Example-
+                        ```jsx
+                        import React, { Component } from 'react';
+                        class TimerComponent extends Component {
+                          constructor() {
+                            super();
+                            this.state = {
+                              time: 0
+                            };
+                            this.intervalId = null;
+                          }
+                        
+                          componentDidMount() {
+                            // Start a timer when the component is mounted
+                            this.intervalId = setInterval(() => {
+                              this.setState((prevState) => ({
+                                time: prevState.time + 1
+                              }));
+                            }, 1000); // Update the time every second (1000 milliseconds)
+                          }
+                        
+                          componentWillUnmount() {
+                            // Clear the timer just before the component is unmounted
+                            clearInterval(this.intervalId);
+                          }
+                        
+                          render() {
+                            return (
+                              <div>
+                                <p>Elapsed Time: {this.state.time} seconds</p>
+                              </div>
+                            );
+                          }
+                        }
+                        
+                        export default TimerComponent;
+                        ```
+                        
+
+    In this example, we have a `TimerComponent` that starts a timer when it's mounted. Here's how it works:
+       
+       1. In the `componentDidMount` method,
+                  we use `setInterval` to start a timer that increments the `time` state every second (1000 milliseconds). 
+                  This timer will keep running and updating the state as long as the component is mounted.
+       
+       2. In the `componentWillUnmount` method, 
+                  we use `clearInterval` to stop and clear the timer just before the component is unmounted. 
+                  This is essential because if the timer continued running after the component was unmounted, 
+                  it could cause memory leaks and unexpected behavior in your application.
+       
+       By using `componentWillUnmount` to clean up resources like timers, event listeners, or any external subscriptions, 
+       you ensure that your component is properly cleaned up when it's no longer needed, 
+       preventing potential issues and improving the overall stability of your React application.
+
+
+
+❓ Why do we use super(props) in constructor?
+     
+     We use super(props) in a constructor when creating a class-based component in React to ensure that the component correctly 
+     inherits properties and functionality from its parent class, which is typically React.Component. 
+  -Here's a simple explanation:
+     
+     1. **Inheritance**: 
+          In React, when you create a new component by extending `React.Component`, you are essentially creating a new class that inherits 
+          all the features and methods of the `React.Component` class.
+     
+     2. **Constructor Chaining**: 
+          When you define a constructor in your component, you should call `super(props)` as the first line of your constructor. 
+          This is because the `React.Component` class also has a constructor, and calling `super(props)` ensures 
+          that this parent constructor is executed before you add your own logic.
+     
+     3. **Passing Props**: 
+         The `super(props)` call is necessary because it passes the `props` object to the parent constructor. 
+         This allows the parent class to set up the component correctly and handle the properties that are passed to it. 
+         Without `super(props)`, the component may not behave as expected, especially when using `props` within the constructor or other lifecycle methods.
+
+
+❓Why can't we have the callback function of useEffect async?
+      
+      In React's `useEffect` hook, you cannot make the callback function `async` directly. 
+      This is because `useEffect` expects its callback function to either return nothing (undefined) or return a cleanup function (a function that cleans up any side effects).
+      
+  Here's why `useEffect` callback functions cannot be `async`:
+              
+     1. **Asynchronous Execution**: 
+            When a function is declared as `async`, it implicitly returns a Promise. 
+            In contrast, `useEffect` expects a synchronous function or a function that returns a cleanup function synchronously.
+     
+     2. **Promise Handling**: 
+            If you make a `useEffect` callback `async`, it may return a Promise, but React doesn't know how to handle the Promise returned by the callback. 
+            React relies on the return value to manage cleanup and dependencies. If you return a Promise, 
+            React won't treat it as a cleanup function or handle it as expected.
+           
+   To work with asynchronous code inside a `useEffect`, you can define an inner function that is marked as `async` and 
+   call it from within the `useEffect` callback. Here's an example:
+            
+            ```jsx
+            import { useEffect } from 'react';
+            
+            function MyComponent() {
+              useEffect(() => {
+                // Define an inner async function
+                async function fetchData() {
+                  try {
+                    const response = await fetch('https://example.com/api/data');
+                    const data = await response.json();
+                    // Do something with the data
+                  } catch (error) {
+                    console.error('Error fetching data:', error);
+                  }
+                }
+            
+                // Call the async function
+                fetchData();
+              }, []); // Empty dependency array means this effect runs once, like componentDidMount
+            }
+            ```
+            
+            In this example, the `fetchData` function is marked as `async`, allowing you to use `await` within it. 
+            You then call `fetchData` within the `useEffect` callback. 
+            
+
+
+****************************************************************************************************************************************
+****************************************************************************************************************************************
+                                                CLASS - NOTES 
+
+
+**Class-Based Components**
+     - `render()` -> The render method returns a piece of JSX that is rendered in the DOM.
+     - `constructor(props)` -> Used to create state variables because it is called first in a class component.
+     - For `setState`, we do not mutate the state directly with `this.state = something`. Instead, we use `this.setState({ count: 1 })`.
+     - `componentDidMount()` -> We make API calls inside this method because it is called after `render()`, allowing us to fetch data after rendering.
+     - `componentDidUpdate()` -> Renders after every update.
+     - `componentWillUnmount()` -> Used to clean up resources. This is called when we leave the page, such as clearing intervals.
+
+**Lifecycle Method Sequence:**
+     1. Render phase -> `constructor()` and `render()`.
+     2. Commit phase -> `componentDidMount()` (calling API and fetching data).
+
+In the render phase,  
+      - the parent is triggered first. The parent's constructor is called, followed by the parent's render method. When the parent's render method is called, 
+       the child's lifecycle is triggered. React tries to complete the render phase of all children before moving on to the commit phase.
+      -(let suppose some of the  children was making an api call(componentDidMount)and it started its commit phase then it delay the render phase for second so it will batch up the render phase for the all child  )
+      
+During the commit phase,
+       React updates the DOM and completes the `componentDidMount()` for all components.
+
+
+**Lifecycle:**
+- Parent
+  - Parent render
+  - Child constructor
+  - Child render
+- DOM is updated
+  - Parent- componentDidMount:
+          At this point, actually it calls `child-componentDidMount`, which is asynchronous and includes an `await` for fetching data. 
+          It waits until all data is fetched, and during this time, the next statement is executed, for now which is `parent-componentDidMount`. that's parent-componentDidMount is printed here "
+    - Child - componentDidMount
+                (now that the wait is over and data is fetched, `console.log` is called, 
+                and it has access to `this.state`, which triggers another render after fetching data. This cycle is known as updating, and it occurs after mounting)
+             - componentDidUpdate() 
+                 (called during the updating phase, it updates after every rendering)
+    - Child render 
+               (in `child-componentDidMount`, `this.state` is called, which triggers another render after fetching data. This cycle is known as updating)
+
+****
+
+
+ child cycle
+ *   child constructor
+ *   child render 
+ *   child componentDidMount 
+ *  
+ *   API call
+ *   Set state
+ *  
+ *   <UPDATE CYCLE>  (put img,name location)
+ *   componentWillUpdate  (as soon as unmounted - when we goes on another page then this is goes from dom)
