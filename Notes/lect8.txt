@@ -238,3 +238,7 @@ During the commit phase,
  *  
  *   <UPDATE CYCLE>  (put img,name location)
  *   componentWillUpdate  (as soon as unmounted - when we goes on another page then this is goes from dom)
+
+
+
+    **React Life Cycle Method Diagram -  https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
