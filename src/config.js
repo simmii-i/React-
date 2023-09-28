@@ -1,6 +1,6 @@
 export const IMG_CDN_URL = "https://media-assets.swiggy.com/swiggy/image/upload/";
 
-
+export const FETCH_MENU_URL = "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=30.29844139999999&lng=77.99313599999999&restaurantId=";
 
 //DATA
 export const restrauntList = [

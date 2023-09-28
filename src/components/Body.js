@@ -3,12 +3,8 @@ import { restrauntList } from "../config";
 import { useEffect, useState } from "react";
 import Shimmer from "./shimmer";
 import { Link } from "react-router-dom";
-
-function filterData(searchInput, restraunts) {
-  return restraunts.filter((restraunt) =>
-    restraunt?.info?.name?.toLowerCase()?.includes(searchInput.toLowerCase())
-  );
-}
+import { filterData } from "../utils/helper";
+import useOnline from "../utils/useOnline";
 
 const Body = () => {
   const [AllRestraunts, setAllRestraunts] = useState([]);
@@ -34,16 +30,19 @@ const Body = () => {
     );
   }
 
+  const isOnline = useOnline();
+  if (!isOnline) {
+    return <h1>Ohoooo... You went Offline 😪</h1>;
+  }
+
   // to avoid rendering--> ? or return null
-  if (!AllRestraunts) return <h1>not there</h1>;
+  if (!AllRestraunts) return null;
 
   // if(AllRestraunts !==0 && filteredRestraunts?.length === 0) return <h1>sorry ....😓 <br></br> No Restraunt math your filter ! Try something else 😻</h1>
 
   console.log("render");
-  //conditonal renderring
-  // if restraunt is emty => shimmer UI
-  // has data =>
-  return AllRestraunts.length === 0 ? (
+
+  return AllRestraunts?.length === 0 ? (
     <Shimmer />
   ) : (
     <>
@@ -72,7 +71,6 @@ const Body = () => {
       </div>
 
       <div className="restraunt-list">
-        {/* (filteredRestraunts?.length === 0) ? return (<h1>sorry ....😓 <br></br> No Restraunt math your filter ! Try something else 😻</h1>) */}
         {filteredRestraunts.map((Restraunt) => {
           return (
             <Link
