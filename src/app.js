@@ -1,5 +1,5 @@
 import React from "react";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -10,18 +10,35 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import RestrauntMenu from "./components/Restrauntmenu";
 import Profile from "./components/Profile";
 import Shimmer from "./components/shimmer";
+import UserContext from "./utils/UserContext";
 
 //Dynamic or LAzy import
 const About = lazy(() => import("./components/About"));
 const Instamart = lazy(() => import("./components/Instamart"));
-const AppLayout = () => (
+
+const AppLayout = () =>{ 
+  const [user, setUser] = useState(
+    {  name : "Simmii",
+      email : "simmii.lappii@gmail.com"
+    
+  })
+
+  return (
   <>
-    <Header />
-    <Outlet />
+  <UserContext.Provider value={{  //override the value of Usercontext 
+    user :user,
+    setUser : setUser,
+  }}>
+  <Header />
+  <Outlet />
+  </UserContext.Provider>
+  
+
+    
     <Footer />
   </>
 );
-
+};
 const appRouter = createBrowserRouter([
   {
     path: "/",
@@ -30,7 +47,7 @@ const appRouter = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Body />,
+        element: <Body/>,
       },
       {
         path: "/about",

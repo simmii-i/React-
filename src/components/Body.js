@@ -1,16 +1,16 @@
 import RestrauntCard from "./RestrauntCard";
 import { restrauntList } from "../config";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Shimmer from "./shimmer";
 import { Link } from "react-router-dom";
 import { filterData } from "../utils/helper";
 import useOnline from "../utils/useOnline";
-
+import UserContext from "../utils/UserContext";
 const Body = () => {
   const [AllRestraunts, setAllRestraunts] = useState([]);
   const [filteredRestraunts, setFilteredRestraunts] = useState([]);
   const [searchInput, setSearchInput] = useState("KFC");
-
+  const {user, setUser} = useContext(UserContext) 
   useEffect(() => {
     //api call
     getRestraunts();
@@ -68,6 +68,10 @@ const Body = () => {
           {" "}
           Search
         </button>
+        <input value={user?.name} onChange={e => setUser({
+          name : e.target.value,
+          email : "new@gmail.com"
+        }) }></input>
       </div>
 
       <div className="flex flex-wrap bg-blue-50 ">
@@ -78,7 +82,7 @@ const Body = () => {
               key={Restraunt.info.id}
             >
               {" "}
-              <RestrauntCard {...Restraunt.info} />{" "}
+              <RestrauntCard {...Restraunt.info} />
             </Link>
           );
         })}

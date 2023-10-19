@@ -1,0 +1,87 @@
+ web app (SPA) = UI layer + Data layer
+
+❓ Prop Drinling - (passing data from parent to child)
+
+      Prop drilling in React means passing data from a high-level component through multiple 
+      intermediary components to reach a lower-level component. This can make code more complex and harder to manage.
+       To mitigate prop drilling, React offers solutions like context or state management libraries.
+
+
+UserContext.displayName = "userContext" //only for debbuging - to show the name of context in developer tool
+
+
+❓ What is lifting the state up? 
+
+     "Lifting state up" is a common pattern in React and other component-based libraries or frameworks. 
+     It refers to the process of moving the management of state from a child component to a parent component, 
+     effectively "lifting" the state to a higher-level component in the component tree. 
+     This pattern is often used to share state and data between components or to manage the state that needs
+      to be shared among multiple components.
+
+
+❓ What is Context Provider and Context Consumer?
+
+In React, the Context API provides a way to pass data (such as global or shared state) down the component tree
+ without the need to pass props manually through each intermediate component. This is particularly useful when
+ you have data that many components need access to.
+
+The Context API consists of two main parts: the Context Provider and the Context Consumer.
+
+1. **Context Provider:**
+   - The Context Provider is a component that "provides" the data or state that you want to share with other components.
+   - It wraps its child components and makes the shared data available to them.
+   - Typically, you create a Context Provider by using `createContext()` and then rendering it as a component in
+      your component tree. You can set an initial value for the context using `ContextProvider.value` or provide
+       a state and functions to update the state.
+
+   - Example of creating a context and providing data:
+
+            import React, { createContext, useState } from 'react';
+              
+              // Create a context
+              const MyContext = createContext();
+              
+              function App() {
+                const [sharedValue, setSharedValue] = useState('This is a shared value.');
+              
+                return (
+                  <MyContext.Provider value={sharedValue}>
+                    <ChildComponent />
+                  </MyContext.Provider>
+                );
+              }
+              
+              
+2. **Context Consumer:**
+   - The Context Consumer is a component that "consumes" or reads the data provided by the Context Provider.
+   - It allows components to access the shared data from the context without the need to pass it through props from parent components.
+   - The `Consumer` component subscribes to the context and re-renders when the context data changes.
+   - Example of consuming data from the context:
+
+            import React, { useContext } from 'react';
+           
+           const MyContext = createContext();
+           
+           function ChildComponent() {
+             const sharedValue = useContext(MyContext);
+           
+             return <div>{sharedValue}</div>;
+           }
+           
+
+In summary ->
+   the Context Provider is responsible for making shared data available to its descendants, 
+   and the Context Consumer is used to access and use that shared data within those descendants.
+   This pattern is especially useful for managing global state, themes, or other data that needs to be accessible 
+   across many components without prop drilling. It simplifies data sharing and keeps your component tree clean and organized.
+
+
+❓If you don’t pass a value to the provider does it take the default value?
+
+No, if you don't pass a value to the provider, it will not take a default value. 
+The Context API does not have a built-in default value for the provider. If you do not provide a value, 
+the consumer components that attempt to access the context will typically receive `undefined` as the context value. 
+To ensure that consumer components always have a value, it's a good practice to set a default value when creating 
+the context, like this:
+
+             const MyContext = createContext(defaultValue);
