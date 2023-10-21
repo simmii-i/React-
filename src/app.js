@@ -7,37 +7,41 @@ import { Footer } from "./components/Footer";
 import Error from "./components/Error";
 import Contact from "./components/Contact";
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import RestrauntMenu from "./components/Restrauntmenu";
+import RestrauntMenu from "./components/RestrauntMenu";
 import Profile from "./components/Profile";
 import Shimmer from "./components/shimmer";
 import UserContext from "./utils/UserContext";
-
+import { Provider } from "react-redux";
+import store from "./utils/store";
+import Cart from "./components/Cart";
+import Order from "./components/Order";
+//import RestrauntMenu from "./components/Restrauntmenu";
 //Dynamic or LAzy import
 const About = lazy(() => import("./components/About"));
 const Instamart = lazy(() => import("./components/Instamart"));
 
-const AppLayout = () =>{ 
-  const [user, setUser] = useState(
-    {  name : "Simmii",
-      email : "simmii.lappii@gmail.com"
-    
-  })
+const AppLayout = () => {
+  const [user, setUser] = useState({
+    name: "Simmii",
+    email: "simmii.lappii@gmail.com",
+  });
 
   return (
-  <>
-  <UserContext.Provider value={{  //override the value of Usercontext 
-    user :user,
-    setUser : setUser,
-  }}>
-  <Header />
-  <Outlet />
-  </UserContext.Provider>
-  
+    <Provider store={store}>
+      <UserContext.Provider
+        value={{
+          //override the value of Usercontext
+          user: user,
+          setUser: setUser,
+        }}
+      >
+        <Header />
+        <Outlet />
+      </UserContext.Provider>
 
-    
-    <Footer />
-  </>
-);
+      <Footer />
+    </Provider>
+  );
 };
 const appRouter = createBrowserRouter([
   {
@@ -47,7 +51,7 @@ const appRouter = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Body/>,
+        element: <Body />,
       },
       {
         path: "/about",
@@ -80,6 +84,14 @@ const appRouter = createBrowserRouter([
           </Suspense>
         ),
       },
+      {
+        path : "/cart",
+        element: <Cart/>
+      },
+      {
+        path: "/order",
+        element : <Order/>
+      }
     ],
   },
 ]);

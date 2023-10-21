@@ -1,7 +1,8 @@
 import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import UserContext from "../utils/UserContext";
-
+import { useSelector } from "react-redux";
+import store from "../utils/store";
 const loggedIn = () => {
   return true;
 };
@@ -19,6 +20,8 @@ const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   
   const {user} = useContext(UserContext)
+
+  const cartItems = useSelector(store => store?.cart?.items)
   
   return (
    
@@ -40,7 +43,9 @@ const Header = () => {
           <li className="px-2">
             <Link to="/contact"> Contact Us </Link>
           </li>
-          <li className="px-2">Cart</li>
+          <Link to={"/cart"}>
+          <li className="flex pl-2">Cart <sup className=" font-bold text-lg"> <div className=" w-5 top-1 h-5 m-0.5 pl-0.5 place-items-center border-2 border-yellow-500 bg-yellow-400 rounded-full"><sup>{cartItems?.length}</sup></div></sup>  </li>
+          </Link>
         </ul>
         
       </div>

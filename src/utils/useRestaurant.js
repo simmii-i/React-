@@ -1,22 +1,26 @@
-import { useState } from "react";
-import { useEffect } from "react";
-import { FETCH_MENU_URL } from "../config";
-
-const useRestaurant = (id) => {
-  const [restaurant, setRestaurant] = useState(null);
+import { useState , useEffect} from "react";
+import { bangloreRestaurantsCDN } from "../config";
+const useRestaurant = () => {
+  const [allRestaurant, SetAllRestaurant] = useState([]);
+  const [filteredRestaurant, setFilteredRestaurant] = useState([])
 
   useEffect(() => {
     getRestaurantInfo();
   }, []);
 
   async function getRestaurantInfo() {
-    const data = await fetch(FETCH_MENU_URL + id);
+    const data = await fetch(bangloreRestaurantsCDN );
     const json = await data.json();
-    console.log(json);
-    setRestaurant(json?.data?.cards[0]?.card?.card?.info);
+    // console.log(json);
+    SetAllRestaurant(json?.data?.cards[2]?.card?.card?.gridElements.infoWithStyle.restaurants)
+    setFilteredRestaurant(json?.data?.cards[2]?.card?.card?.gridElements.infoWithStyle.restaurants)
+
+    // setRestaurant(json?.data?.cards[0]?.card?.card?.info);
   }
 
-  return restaurant;
+  // return restaurant;
+  return {allRestaurant,filteredRestaurant,setFilteredRestaurant}
+
 };
 export default useRestaurant;
 
