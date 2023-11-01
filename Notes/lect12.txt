@@ -1,0 +1,132 @@
+❓ Why React Testing library ->
+
+❓ Why do we need test cases?
+
+- When developing a large-scale application, it's essential to ensure that passing data to a component does not disrupt the flow of our code. 
+To achieve this, we can write test cases to verify that our code remains intact. Testing our code ensures that any new code additions do not 
+break the existing codebase.
+
+
+- ❓ Test Driven Development 
+ Test-Driven Development (TDD) involves writing test cases before writing the actual code. This approach ensures a high quality of code. 
+ However, it can significantly increase development time, making the process slower. This is why many companies do not prioritize 
+ Test-Driven Development, as it also requires a different perspective.
+
+  like eg 
+
+ first i write all test case  then we write sum func:
+
+          test("check sum of 2 num ", () => {
+              expect(sum(2,3)).toBe(5);
+              expect(sum(-2,3)).toBe(1);
+           }
+        const sum = ()
+       
+
+
+
+- ❓Diff type of Testing 
+
+  🔸 * Manual Testing  (!....Human envolve  means error envolve...!)
+
+  🔸 * Selenium Testing: A tool for writing End-to-End (E2E) tests.
+         End-to-End (E2E) testing: A method that replaces manual testing with code, covering the entire journey of an application. 
+         It is conducted using Selenium or other technologies and typically uses a Headless Browser.
+        🔹- Headless Browser: Similar to a real browser but without a graphical user interface (UI). It operates invisibly.
+           [A "headless browser" is a web browser that operates without a graphical user interface (UI). 
+              Unlike traditional web browsers like Chrome, Firefox, or Safari, a headless browser doesn't display web pages to the user. 
+              Instead, it runs in the background and can be controlled programmatically.]
+ 
+   🔸 * Unit Testing: Testing small units such as logos, shopping carts, and individual component features.
+    
+   🔸 * Integration Testing: Evaluating the interaction and integration between different components.
+
+
+
+
+- ❓ what is Jest 
+    -is a delightful javascript testing framework with a focus on simplecity.
+    Jest provides a simple and powerful set of tools for writing and running tests, making it easier to ensure the correctness 
+    of your code by automating the testing process. It includes features for test assertion, mocking, test runners, and more, 
+    making it a versatile choice for testing JavaScript applications and ensuring their reliability.
+
+
+ 📍Step 
+- install react testing library - npm install --save-dev @testing-library/react
+- install Jest (npm i -D jest)
+- configure Jest - create jest file ( npx jest --init) 
+    -npx bcoz we want at once to crete config  file.
+    (1) no typescript
+    (2) Browser environment - JSdom
+    (3) coverage report - yes
+    (4) provider - babel
+    (5) automatically clear mock calls - yes
+
+-npm i -D jest-environment-jsdom
+        bcoz of error that(
+       As of Jest 28 "jest-environment-jsdom" is no longer shipped by default, 
+       make sure to install it separately.) 
+
+-Create first test case file (with __tests__ , only this folder consider with test case file, or with .test.js extension)
+
+-configure babel  (npm install --save-dev babel-jest @babel/core @babel/preset-env)
+    
+    - 🔸Why is this necessary?  =>  The reason is that our regular JavaScript doesn't recognize the 'import' statement. 
+    This code runs within a Jest environment (jsDom), which differs from our web browser, causing it to struggle with the 'import' syntax. 
+    To resolve this, we enlist the aid of Babel, a tool that adjusts the code according to our configuration. 
+    Therefore, it's crucial to configure Jest with Babel for seamless integration."
+     
+     way's to configure
+
+     🔸 1. babel.js
+      
+     🔸 2.  .babelrc - 
+             We need a JSON object, not standard JavaScript, so we must convert it into JSON, enclosing everything in double quotes (''). 
+             JSX, a JavaScript extension used for React, doesn't inherently understand this format. To resolve this, we install the '@babel/preset-react' library 
+             and include 'preset-react' in our '.babelrc' file with the configuration: '["@babel/preset-react", {"runtime": "automatic"}].' 
+             This setup ensures JSX is correctly processed.
+
+-wrote test case (sum)
+-gitignore coverage report
+
+
+
+
+
+ ❓ Why we install different Library/Component/Function  to handle error ❌ 
+
+ 🔸* "When rendering a component in the browser, we typically place it inside the root of the Document Object Model (DOM). However, when working in a jsDOM environment, 
+ there is no root element by default. To address this, we import the render() function. This render function provides us with a container element, allowing us to load 
+ our header or any other component within that container."
+
+
+🔸* Image Handling - in our testing, it read it like js code and it break. To overcome this, we create a dummy image file in JavaScrip
+
+🔸* moduleNameMapper : In our Jest configuration, we utilize the moduleNameMapper to map all .png, .jpg, and .svg files to our dummy image file:
+      moduleNameMapper :[
+         "\\.(png|jpg|svg)$" : "../mocks/dummyLogo.js"
+      ]
+
+
+🔸* Provider : In our header file, we use useSelector to subscribe to the store. In testing, we lack the Provider component. 
+  To address this, we wrap our header within a Provider and provide it with the necessary store via props
+
+
+🔸*staticRouter : in header file (DOM) , we have appRouter - createreactBroser , but we dont have browser so we import {staticRouter} from react-routet-dom/server. 
+ this router can work with out browser, so we provide staticRouter to this header. 
+ making it suitable for testing, and we provide it to our header component.
+
+
+🔸*search bar testing - Testing the search bar involves making HTTP fetch calls. 
+ Since Jest doesn't understand fetch and to prevent actual network requests, we create a mock for our fetch calls. 
+ This is achieved by setting global.fetch to jest.fn(), a dummy function that resolves promises 
+ and allows us to simulate data retrieval from an API in a controlled manner.
+           
+       global.fetch = jest.fn(() =>{
+           return Promise.resolve({
+               json : ()=>{
+                 return Promise.resolve(RES_DATA)
+               },
+           });
+       });
+       

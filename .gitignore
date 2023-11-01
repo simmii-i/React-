@@ -6,3 +6,4 @@
 /.parcel-cache/
 
 .babelrc
+/coverage

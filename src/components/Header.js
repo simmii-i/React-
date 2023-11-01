@@ -10,7 +10,9 @@ const loggedIn = () => {
 const title = (
   <div className="h-28 w-28 bg-black">
   <img 
+  data-testid="logo"
     alt="logo"
+    
     src="https://obs.line-scdn.net/0m0339dd5b72513e8a8d6127b836e5ecf1e128f1da5cb7"
   ></img>
   </div>
@@ -19,7 +21,7 @@ const title = (
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   
-  const {user} = useContext(UserContext)
+  // const {user} = useContext(UserContext)
 
   const cartItems = useSelector(store => store?.cart?.items)
   
@@ -44,12 +46,12 @@ const Header = () => {
             <Link to="/contact"> Contact Us </Link>
           </li>
           <Link to={"/cart"}>
-          <li className="flex pl-2">Cart <sup className=" font-bold text-lg"> <div className=" w-5 top-1 h-5 m-0.5 pl-0.5 place-items-center border-2 border-yellow-500 bg-yellow-400 rounded-full"><sup>{cartItems?.length}</sup></div></sup>  </li>
+          <li  className="flex pl-2">Cart <sup className=" font-bold text-lg"> <div className=" w-5 top-1 h-5 m-0.5 pl-0.5 place-items-center border-2 border-yellow-500 bg-yellow-400 rounded-full"><sup data-testid="cart">{cartItems?.length}</sup></div></sup>  </li>
           </Link>
         </ul>
         
       </div>
-      <span className="p-10 font-bold text-black-900"> {user?.name}</span>
+      {/* <span className="p-10 font-bold text-black-900"> {user?.name}</span> */}
       {isLoggedIn ? (
         <button onClick={() => setIsLoggedIn(false)}>LogOut</button>
       ) : (

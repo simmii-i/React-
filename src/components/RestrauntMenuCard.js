@@ -57,6 +57,7 @@ const RestrauntMenuCard = ({
       <div className="flex flex-col justify-end overflow-auto ">
         <img className="h-[100%] w-[100%]" src={IMG_CDN_URL + imageId}></img>
         <button
+        data-testid="addBtn"
           className="rounded-none bg-blue-500 p-2 w-20 ml-[30%]"
           onClick={() => handleAddItem(item)}
         >

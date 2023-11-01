@@ -18,7 +18,7 @@ const Cart = () => {
 
   return (
     <>
-      <div className=" flex flex-wrap mt-40">
+      <div className=" flex flex-wrap mt-40" data-testid = "cartItem">
         {cartItems.map((item) => (
           <FoodItem key={item.id} {...item} />
         ))}

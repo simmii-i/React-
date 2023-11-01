@@ -21,23 +21,23 @@ const About = lazy(() => import("./components/About"));
 const Instamart = lazy(() => import("./components/Instamart"));
 
 const AppLayout = () => {
-  const [user, setUser] = useState({
-    name: "Simmii",
-    email: "simmii.lappii@gmail.com",
-  });
+  // const [user, setUser] = useState({
+  //   name: "Simmii",
+  //   email: "simmii.lappii@gmail.com",
+  // });
 
   return (
     <Provider store={store}>
-      <UserContext.Provider
+      {/* <UserContext.Provider
         value={{
           //override the value of Usercontext
           user: user,
           setUser: setUser,
         }}
-      >
+      > */}
         <Header />
         <Outlet />
-      </UserContext.Provider>
+      {/* </UserContext.Provider> */}
 
       <Footer />
     </Provider>

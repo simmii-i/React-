@@ -36,7 +36,7 @@ const RestrauntMenu = () => {
           ))}{" "}
         </ul>
       </div> */}
-      <div className="border-t border-blue-300 mt-7 flex flex-col items-center">
+      <div className="border-t border-blue-300 mt-7 flex flex-col items-center" data-testid="menu">
       {Object.values(menu).map((item) => (
             <RestrauntMenuCard key={item?.card?.info?.id} {...item?.card?.info}/>
         ))}

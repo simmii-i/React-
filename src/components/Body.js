@@ -14,26 +14,7 @@ const Body = () => {
   const [searchInput, setSearchInput] = useState("KFC");
   const { allRestaurant,setFilteredRestaurant, filteredRestaurant } = useRestaurant();
 
-  const {user, setUser} = useContext(UserContext) 
-
-  // useEffect(() => {
-  //   //api call
-  //   getRestraunts();
-  // }, []);
-
-  // async function getRestraunts() {
-  //   const data = await fetch(
-  //     "https://www.swiggy.com/dapi/restaurants/list/v5?lat=30.29844139999999&lng=77.99313599999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-  //   );
-  //   const json = await data.json();
-  //   console.log(json);
-  //   setAllRestraunts(
-  //     json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-  //   );
-  //   setFilteredRestraunts(
-  //     json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-  //   );
-  // }
+  // const {user, setUser} = useContext(UserContext) 
 
   const isOnline = useOnline();
   if (!isOnline) {
@@ -57,6 +38,7 @@ const Body = () => {
     <>
       <div className="search-container p-5 bg-blue-200  my-5">
         <input
+        data-testid = "search-input"
           type="text"
           placeholder="Search"
           className="search-input bg-blue-100  rounded-md  focus:bg-blue-300 p-2 m-2"
@@ -68,6 +50,7 @@ const Body = () => {
         ></input>
 
         <button
+          data-testid = "search-btn"
           className="search-btn p-2 m-2 bg-blue-500 hover:bg-blue-700 text-white rounded-lg"
           onClick={() => {
             const data = filterData(searchInput, allRestaurant);
@@ -77,10 +60,10 @@ const Body = () => {
           {" "}
           Search
         </button>
-        <input value={user?.name} onChange={e => setUser({
+        {/* <input value={user?.name} onChange={e => setUser({
           name : e.target.value,
           email : "new@gmail.com"
-        }) }></input>
+        }) }></input> */}
       </div>
 
       {/* <div className="flex flex-wrap bg-blue-50 ">
@@ -96,7 +79,7 @@ const Body = () => {
           );
         })}
       </div> */}
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap" data-testid="res_list">
         {filteredRestaurant.length === 0 ? (
           <h1>No Restaurant Found</h1>
         ) : (
