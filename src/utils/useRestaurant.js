@@ -1,5 +1,6 @@
 import { useState , useEffect} from "react";
-import { bangloreRestaurantsCDN } from "../config";
+import { restaurantsCDN } from "../config";
+import { restrauntList } from "../config";
 const useRestaurant = () => {
   const [allRestaurant, SetAllRestaurant] = useState([]);
   const [filteredRestaurant, setFilteredRestaurant] = useState([])
@@ -9,12 +10,15 @@ const useRestaurant = () => {
   }, []);
 
   async function getRestaurantInfo() {
-    const data = await fetch(bangloreRestaurantsCDN );
+    const data = await fetch(restaurantsCDN );
     const json = await data.json();
-    // console.log(json);
-    SetAllRestaurant(json?.data?.cards[2]?.card?.card?.gridElements.infoWithStyle.restaurants)
-    setFilteredRestaurant(json?.data?.cards[2]?.card?.card?.gridElements.infoWithStyle.restaurants)
-
+    console.log("data res");
+     console.log(json);
+     console.log(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+     SetAllRestaurant(restrauntList)
+    // SetAllRestaurant(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+    // setFilteredRestaurant(json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+    setFilteredRestaurant(restrauntList)
     // setRestaurant(json?.data?.cards[0]?.card?.card?.info);
   }
 
